@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.Web", "TAMS.Web\TAMS.Web.csproj", "{47A03B60-A000-460E-A196-1357032FFE97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.Web", "TAMS.Web\TAMS.Web.csproj", "{47A03B60-A000-460E-A196-1357032FFE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.DataAccess", "TAMS.DataAccess\TAMS.DataAccess.csproj", "{1581520F-5484-464E-81A1-9DEA480A8BA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.DataAccess", "TAMS.DataAccess\TAMS.DataAccess.csproj", "{1581520F-5484-464E-81A1-9DEA480A8BA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.Common", "TAMS.Common\TAMS.Common.csproj", "{1FD3C7E5-79F7-40E6-84BD-734740D26B9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.Common", "TAMS.Common\TAMS.Common.csproj", "{1FD3C7E5-79F7-40E6-84BD-734740D26B9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.Entity", "TAMS.Entity\TAMS.Entity.csproj", "{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.Entity", "TAMS.Entity\TAMS.Entity.csproj", "{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.UnitTest", "TAMS.UnitTest\TAMS.UnitTest.csproj", "{14577880-202C-48B0-B4B5-D0563F9D566A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14577880-202C-48B0-B4B5-D0563F9D566A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14577880-202C-48B0-B4B5-D0563F9D566A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14577880-202C-48B0-B4B5-D0563F9D566A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14577880-202C-48B0-B4B5-D0563F9D566A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

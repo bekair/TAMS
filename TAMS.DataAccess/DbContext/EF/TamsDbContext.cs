@@ -23,5 +23,18 @@ namespace TAMS.DataAccess.DbContext.EF
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<TennisTraining> TennisTrainings { get; set; }
+        public DbSet<TennisTrainingPackage> TennisTrainingPackages { get; set; }
+        public DbSet<TraineeTennisTraining> TraineeTennisTrainings { get; set; }
+        public DbSet<Trainee> Trainees { get; set; }
+        public DbSet<TraineeAddress> TraineeAddresses { get; set; }
+        public DbSet<Academy> Academies { get; set; }
+        public DbSet<AcademyAddress> AcademyAddresses { get; set; }
+        public DbSet<Club> Clubs { get; set; }
+        public DbSet<ClubAddress> ClubAddresses { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
+        public DbSet<TennisCourt> TennisCourts { get; set; }
+        public DbSet<TraineeCoach> TraineeCoaches { get; set; }
+        public DbSet<TennisCourtSchedule> TennisCourtSchedules { get; set; }
     }
 }
