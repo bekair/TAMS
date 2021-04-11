@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using TAMS.Common.Enums;
 using TAMS.Entity.Base;
 
@@ -25,7 +26,9 @@ namespace TAMS.Entity.Concrete
         [Required]
         public bool IsLightingExist { get; set; }
 
+
         //Navigation Properties
         public Club Club { get; set; }
+        public ICollection<TennisCourtSchedule> TennisCourtScheduleList { get; set; }
     }
 }

@@ -37,6 +37,7 @@ namespace TAMS.Entity.Concrete
         public Coach Coach { get; set; }
         public TennisTrainingPackage TennisTrainingPackage { get; set; }
         public TennisCourt TennisCourt { get; set; }
+        public TennisCourtSchedule TennisCourtSchedule { get; set; }
         public ICollection<Trainee> TraineeList { get; set; }
     }
 }

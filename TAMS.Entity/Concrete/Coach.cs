@@ -16,5 +16,6 @@ namespace TAMS.Entity.Concrete
         //Navigation Properties
         public AppUser AppUser { get; set; }
         public ICollection<Trainee> TraineeList { get; set; }
+        public ICollection<TennisTraining> TennisTrainingList { get; set; }
     }
 }

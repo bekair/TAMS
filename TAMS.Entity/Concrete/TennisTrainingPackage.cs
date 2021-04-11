@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TAMS.Entity.Base;
 
@@ -19,8 +20,12 @@ namespace TAMS.Entity.Concrete
         [Required]
         public decimal UnitPrice { get; set; }
 
+        [Required]
+        public bool IsPaymentCompleted { get; set; }
+
 
         //Navigation Properties
         public Trainee Trainee { get; set; }
+        public ICollection<TennisTraining> TennisTrainingList { get; set; }
     }
 }

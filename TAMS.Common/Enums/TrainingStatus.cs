@@ -2,8 +2,9 @@
 {
     public enum TrainingStatus
     {
-        InProgress = 1,
-        Completed = 2,
-        Canceled = 3
+        WaitingForPayment = 1,
+        Active = 2,
+        Completed = 3,
+        Canceled = 4
     }
 }

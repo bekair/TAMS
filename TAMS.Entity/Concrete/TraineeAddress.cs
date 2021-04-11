@@ -10,6 +10,7 @@ namespace TAMS.Entity.Concrete
         [ForeignKey("Trainee")]
         public long TraineeId { get; set; }
 
+
         //Navigation Properties
         public Trainee Trainee { get; set; }
     }

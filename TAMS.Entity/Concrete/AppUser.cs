@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using TAMS.Entity.Base;
 
 namespace TAMS.Entity.Concrete
@@ -18,6 +17,6 @@ namespace TAMS.Entity.Concrete
         public string LastName { get; set; }
 
         //Navigation Properties
-        public ICollection<Coach> CoachList { get; set; }
+        public Coach Coach { get; set; }
     }
 }

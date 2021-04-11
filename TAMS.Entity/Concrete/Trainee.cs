@@ -28,5 +28,6 @@ namespace TAMS.Entity.Concrete
         public ICollection<TraineeAddress> TraineeAddressList { get; set; }
         public ICollection<Coach> CoachList { get; set; }
         public ICollection<TennisTraining> TennisTrainingList { get; set; }
+        public ICollection<TennisTrainingPackage> TennisTrainingPackageList { get; set; }
     }
 }
