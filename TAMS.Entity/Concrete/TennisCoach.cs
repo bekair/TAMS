@@ -5,7 +5,7 @@ using TAMS.Entity.Base;
 
 namespace TAMS.Entity.Concrete
 {
-    public class Coach : EntityBase
+    public class TennisCoach : EntityBase
     {
         [Required]
         [ForeignKey("AppUser")]
@@ -13,9 +13,10 @@ namespace TAMS.Entity.Concrete
 
         public int? YearsOfExperience { get; set; }
 
+
         //Navigation Properties
         public AppUser AppUser { get; set; }
-        public ICollection<Trainee> TraineeList { get; set; }
+        public ICollection<TennisTrainee> TennisTraineeList { get; set; }
         public ICollection<TennisTraining> TennisTrainingList { get; set; }
     }
 }

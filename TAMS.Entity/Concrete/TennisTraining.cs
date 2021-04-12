@@ -9,13 +9,13 @@ namespace TAMS.Entity.Concrete
 {
     public class TennisTraining : EntityBase
     {
-        [Required]
-        [ForeignKey("Coach")]
-        public long CoachId { get; set; }
-
         [ForeignKey("TennisTrainingPackage")]
         public long? TennisTrainingPackageId { get; set; }
         
+        [Required]
+        [ForeignKey("TennisCoach")]
+        public long TennisCoachId { get; set; }
+
         [Required]
         [ForeignKey("TennisCourt")]
         public long TennisCourtId { get; set; }
@@ -34,10 +34,10 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Coach Coach { get; set; }
-        public TennisTrainingPackage TennisTrainingPackage { get; set; }
+        public TennisCoach TennisCoach { get; set; }
         public TennisCourt TennisCourt { get; set; }
         public TennisCourtSchedule TennisCourtSchedule { get; set; }
-        public ICollection<Trainee> TraineeList { get; set; }
+        public TennisTrainingPackage TennisTrainingPackage { get; set; }
+        public ICollection<TennisTrainee> TennisTraineeList { get; set; }
     }
 }

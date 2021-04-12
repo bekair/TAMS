@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TAMS.Common.Enums;
 using TAMS.Entity.Base;
 
 namespace TAMS.Entity.Concrete
@@ -8,24 +9,29 @@ namespace TAMS.Entity.Concrete
     public class TennisTrainingPackage : EntityBase
     {
         [Required]
-        [ForeignKey("Trainee")]
-        public long TraineeId { get; set; }
+        [ForeignKey("TennisTrainee")]
+        public long TennisTraineeId { get; set; }
 
         [Required]
-        public int TotalTrainingNumber { get; set; }
+        [ForeignKey("TennisTrainingPackageInformation")]
+        public long TennisTrainingPackageInformationId { get; set; }
 
         [Required]
-        public int RemainingTrainingNumber { get; set; }
+        public int TotalNumberOfTraining { get; set; }
 
         [Required]
-        public decimal UnitPrice { get; set; }
+        public int NumberOfRemainingTraining { get; set; }
 
         [Required]
-        public bool IsPaymentCompleted { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        [Required]
+        public PaymentStatus PaymentStatus { get; set; }
 
 
         //Navigation Properties
-        public Trainee Trainee { get; set; }
         public ICollection<TennisTraining> TennisTrainingList { get; set; }
+        public TennisTrainee TennisTrainee { get; set; }
+        public TennisTrainingPackageInformation TennisTrainingPackageInformation { get; set; }
     }
 }

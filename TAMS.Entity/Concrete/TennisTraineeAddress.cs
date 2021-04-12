@@ -4,14 +4,14 @@ using TAMS.Entity.Base;
 
 namespace TAMS.Entity.Concrete
 {
-    public class TraineeAddress : AddressBase
+    public class TennisTraineeAddress : AddressBase
     {
         [Required]
-        [ForeignKey("Trainee")]
-        public long TraineeId { get; set; }
+        [ForeignKey("TennisTrainee")]
+        public long TennisTraineeId { get; set; }
 
 
         //Navigation Properties
-        public Trainee Trainee { get; set; }
+        public TennisTrainee TennisTrainee { get; set; }
     }
 }

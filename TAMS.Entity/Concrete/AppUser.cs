@@ -16,7 +16,8 @@ namespace TAMS.Entity.Concrete
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+
         //Navigation Properties
-        public Coach Coach { get; set; }
+        public TennisCoach TennisCoach { get; set; }
     }
 }
