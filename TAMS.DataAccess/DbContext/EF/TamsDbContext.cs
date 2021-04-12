@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.DbContext.EF
 {
-    public class TamsDbContext : IdentityDbContext
+    public class TamsDbContext : IdentityDbContext<AppUser, IdentityRole<long>, long>
     {
         public TamsDbContext(DbContextOptions<TamsDbContext> options)
             : base(options)
@@ -16,12 +17,20 @@ namespace TAMS.DataAccess.DbContext.EF
         {
             base.OnModelCreating(builder);
 
-            //Ignore IdentityUser table not to create it in our db.
-            builder.Ignore<IdentityUser>();
+            //Precision and Scale configuration for TennisTraining => Price property
+            builder.Entity<TennisTraining>()
+                .Property(tt => tt.Price)
+                .HasPrecision(12, 3);
 
-            //Ignore AddressBase table not to create it in our db.
-            //builder.Ignore<AddressBase>();
+            //Precision and Scale configuration for TennisTrainingPackage => TotalPrice property
+            builder.Entity<TennisTrainingPackage>()
+                .Property(tt => tt.TotalPrice)
+                .HasPrecision(12, 3);
 
+            //Precision and Scale configuration for TennisTrainingPackageInformation => UnitPrice property
+            builder.Entity<TennisTrainingPackageInformation>()
+                .Property(tt => tt.UnitPrice)
+                .HasPrecision(12, 3);
 
             //One-to-One Relationship between Academy and AcademyAddress
             builder.Entity<Academy>()
@@ -63,7 +72,7 @@ namespace TAMS.DataAccess.DbContext.EF
             builder.Entity<TennisCoach>()
                 .HasMany(p => p.TennisTraineeList)
                 .WithMany(p => p.CoachList)
-                .UsingEntity(j => j.ToTable("TennisTraineeTennisCoach"));
+                .UsingEntity(j => j.ToTable("TennisTraineeTennisCoaches"));
 
             //One-to-Many Relationship between TennisCourtSchedule and TennisCourt
             builder.Entity<TennisCourtSchedule>()
@@ -93,7 +102,7 @@ namespace TAMS.DataAccess.DbContext.EF
             builder.Entity<TennisTrainee>()
                 .HasMany(p => p.TennisTrainingList)
                 .WithMany(p => p.TennisTraineeList)
-                .UsingEntity(j => j.ToTable("TennisTraineeTennisTraining"));
+                .UsingEntity(j => j.ToTable("TennisTraineeTennisTrainings"));
 
             //One-to-Many Relationship between TennisTrainee and TennisTrainingPackage
             builder.Entity<TennisTrainingPackage>()
@@ -113,12 +122,31 @@ namespace TAMS.DataAccess.DbContext.EF
                 .WithMany(m => m.TennisTrainingPackageList)
                 .HasForeignKey(m => m.TennisTrainingPackageInformationId);
 
+            //One-to-Many Relationship between AppUser and AppUser (CreatedBy)
+            builder.Entity<AppUser>()
+                .HasOne(m => m.CreatedByUser)
+                .WithMany(m => m.CreatedUserList)
+                .HasForeignKey(m => m.CreatedBy);
+
+            //One-to-Many Relationship between AppUser and AppUser (UpdatedBy)
+            builder.Entity<AppUser>()
+                .HasOne(m => m.UpdatedByUser)
+                .WithMany(m => m.UpdatedUserList)
+                .HasForeignKey(m => m.UpdatedBy);
+
+            //Unique Constraint in TennisTrainingPackageInformation => TennisTrainingType property
             builder.Entity<TennisTrainingPackageInformation>()
                 .HasIndex(t => t.TennisTrainingType)
                 .IsUnique();
+
+            //OnDelete Cascade prevention. To prevent the 'Introducing FOREIGN KEY constraint for all tables
+            //which may cause cycles or multiple cascade paths.' error, OnDelete NoAction raw has been added.
+            foreach (var foreignKey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
+            }
         }
 
-        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<TennisTraining> TennisTrainings { get; set; }
         public DbSet<TennisTrainingPackage> TennisTrainingPackages { get; set; }
         public DbSet<TennisTrainee> TennisTrainees { get; set; }
@@ -127,7 +155,7 @@ namespace TAMS.DataAccess.DbContext.EF
         public DbSet<AcademyAddress> AcademyAddresses { get; set; }
         public DbSet<Club> Clubs { get; set; }
         public DbSet<ClubAddress> ClubAddresses { get; set; }
-        public DbSet<TennisCoach> Coaches { get; set; }
+        public DbSet<TennisCoach> TennisCoaches { get; set; }
         public DbSet<TennisCourt> TennisCourts { get; set; }
         public DbSet<TennisCourtSchedule> TennisCourtSchedules { get; set; }
         public DbSet<TennisTrainingPackageInformation> TennisTrainingPackageInformation { get; set; }

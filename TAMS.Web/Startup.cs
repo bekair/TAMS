@@ -30,7 +30,7 @@ namespace TAMS.Web
                 );
             });
 
-            services.AddIdentity<AppUser, IdentityRole>()
+            services.AddIdentity<AppUser, IdentityRole<long>>()
                     .AddEntityFrameworkStores<TamsDbContext>()
                     .AddDefaultTokenProviders();
 
