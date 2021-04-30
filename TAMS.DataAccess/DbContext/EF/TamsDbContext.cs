@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.DbContext.EF
 {
-    public class TamsDbContext : IdentityDbContext<AppUser, IdentityRole<long>, long>
+    public class TamsDbContext : IdentityDbContext<AppUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public TamsDbContext(DbContextOptions<TamsDbContext> options)
             : base(options)
@@ -17,6 +16,15 @@ namespace TAMS.DataAccess.DbContext.EF
         {
             base.OnModelCreating(builder);
 
+            //Overrides of Identity entity names which gives its name to Tables as defaults
+            builder.Entity<AppUser>().ToTable("User");
+            builder.Entity<RoleClaim>().ToTable(nameof(RoleClaim));
+            builder.Entity<Role>().ToTable(nameof(Role));
+            builder.Entity<UserClaim>().ToTable(nameof(UserClaim));
+            builder.Entity<UserRole>().ToTable(nameof(UserRole));
+            builder.Entity<UserLogin>().ToTable(nameof(UserLogin));
+            builder.Entity<UserToken>().ToTable(nameof(UserToken));
+
             //Precision and Scale configuration for TennisTraining => Price property
             builder.Entity<TennisTraining>()
                 .Property(tt => tt.Price)
@@ -24,12 +32,12 @@ namespace TAMS.DataAccess.DbContext.EF
 
             //Precision and Scale configuration for TennisTrainingPackage => TotalPrice property
             builder.Entity<TennisTrainingPackage>()
-                .Property(tt => tt.TotalPrice)
+                .Property(ttp => ttp.TotalPrice)
                 .HasPrecision(12, 3);
 
             //Precision and Scale configuration for TennisTrainingPackageInformation => UnitPrice property
             builder.Entity<TennisTrainingPackageInformation>()
-                .Property(tt => tt.UnitPrice)
+                .Property(ttp => ttp.UnitPrice)
                 .HasPrecision(12, 3);
 
             //One-to-One Relationship between Academy and AcademyAddress
@@ -139,6 +147,7 @@ namespace TAMS.DataAccess.DbContext.EF
                 .HasIndex(t => t.TennisTrainingType)
                 .IsUnique();
 
+            //This row should be last row after the foreign key definitons.
             //OnDelete Cascade prevention. To prevent the 'Introducing FOREIGN KEY constraint for all tables
             //which may cause cycles or multiple cascade paths.' error, OnDelete NoAction raw has been added.
             foreach (var foreignKey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

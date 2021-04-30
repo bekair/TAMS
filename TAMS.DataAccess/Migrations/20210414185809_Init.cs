@@ -8,32 +8,18 @@ namespace TAMS.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
+                name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -52,36 +38,16 @@ namespace TAMS.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_CreatedBy",
+                        name: "FK_User_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_UpdatedBy",
+                        name: "FK_User_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<long>(type: "bigint", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -89,110 +55,60 @@ namespace TAMS.DataAccess.Migrations
                 name: "Academies",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AcademyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AcademyFounder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Academies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Academies_AspNetUsers_CreatedBy",
+                        name: "FK_Academies_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Academies_AspNetUsers_UpdatedBy",
+                        name: "FK_Academies_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "Role",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_Role", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    RoleId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
+                        name: "FK_Role_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
+                        name: "FK_Role_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -200,33 +116,33 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisCoaches",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AppUserId = table.Column<long>(type: "bigint", nullable: false),
+                    AppUserId = table.Column<int>(type: "int", nullable: false),
                     YearsOfExperience = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisCoaches", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TennisCoaches_AspNetUsers_AppUserId",
+                        name: "FK_TennisCoaches_User_AppUserId",
                         column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TennisCoaches_AspNetUsers_CreatedBy",
+                        name: "FK_TennisCoaches_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TennisCoaches_AspNetUsers_UpdatedBy",
+                        name: "FK_TennisCoaches_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -234,28 +150,131 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTrainingPackageInformation",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TennisTrainingType = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(12,3)", precision: 12, scale: 3, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisTrainingPackageInformation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TennisTrainingPackageInformation_AspNetUsers_CreatedBy",
+                        name: "FK_TennisTrainingPackageInformation_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TennisTrainingPackageInformation_AspNetUsers_UpdatedBy",
+                        name: "FK_TennisTrainingPackageInformation_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClaim",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserClaim", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserClaim_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserClaim_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserClaim_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogin",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogin", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_UserLogin_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserLogin_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserLogin_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserToken",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserToken", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_UserToken_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserToken_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserToken_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -263,17 +282,17 @@ namespace TAMS.DataAccess.Migrations
                 name: "AcademyAddresses",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AcademyId = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AcademyId = table.Column<int>(type: "int", nullable: false),
                     AddressType = table.Column<int>(type: "int", nullable: false),
                     AddressName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -284,14 +303,14 @@ namespace TAMS.DataAccess.Migrations
                         principalTable: "Academies",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AcademyAddresses_AspNetUsers_CreatedBy",
+                        name: "FK_AcademyAddresses_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AcademyAddresses_AspNetUsers_UpdatedBy",
+                        name: "FK_AcademyAddresses_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -299,18 +318,18 @@ namespace TAMS.DataAccess.Migrations
                 name: "Clubs",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AcademyId = table.Column<long>(type: "bigint", nullable: true),
+                    AcademyId = table.Column<int>(type: "int", nullable: true),
                     ClubName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClubAbbreviation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClubFounder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -322,14 +341,86 @@ namespace TAMS.DataAccess.Migrations
                         principalTable: "Academies",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Clubs_AspNetUsers_CreatedBy",
+                        name: "FK_Clubs_User_CreatedBy",
                         column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Clubs_AspNetUsers_UpdatedBy",
+                        name: "FK_Clubs_User_UpdatedBy",
                         column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleClaim",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleClaim", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleClaim_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_RoleClaim_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_RoleClaim_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRole",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRole", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRole_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserRole_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserRole_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserRole_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -337,35 +428,35 @@ namespace TAMS.DataAccess.Migrations
                 name: "ClubAddresses",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClubId = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ClubId = table.Column<int>(type: "int", nullable: false),
                     AddressType = table.Column<int>(type: "int", nullable: false),
                     AddressName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ClubAddresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClubAddresses_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ClubAddresses_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_ClubAddresses_Clubs_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Clubs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ClubAddresses_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ClubAddresses_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -373,9 +464,9 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisCourts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClubId = table.Column<long>(type: "bigint", nullable: false),
+                    ClubId = table.Column<int>(type: "int", nullable: false),
                     CourtName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourtNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourtSurface = table.Column<int>(type: "int", nullable: false),
@@ -383,28 +474,28 @@ namespace TAMS.DataAccess.Migrations
                     IsHeatingExist = table.Column<bool>(type: "bit", nullable: false),
                     IsLightingExist = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisCourts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TennisCourts_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisCourts_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_TennisCourts_Clubs_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Clubs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisCourts_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisCourts_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -412,37 +503,37 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTrainees",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClubId = table.Column<long>(type: "bigint", nullable: false),
+                    ClubId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TraineeType = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisTrainees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TennisTrainees_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisTrainees_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_TennisTrainees_Clubs_ClubId",
                         column: x => x.ClubId,
                         principalTable: "Clubs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainees_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainees_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -450,35 +541,35 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTraineeAddresses",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TennisTraineeId = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TennisTraineeId = table.Column<int>(type: "int", nullable: false),
                     AddressType = table.Column<int>(type: "int", nullable: false),
                     AddressName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisTraineeAddresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TennisTraineeAddresses_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisTraineeAddresses_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_TennisTraineeAddresses_TennisTrainees_TennisTraineeId",
                         column: x => x.TennisTraineeId,
                         principalTable: "TennisTrainees",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTraineeAddresses_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTraineeAddresses_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
                         principalColumn: "Id");
                 });
 
@@ -486,8 +577,8 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTraineeTennisCoaches",
                 columns: table => new
                 {
-                    CoachListId = table.Column<long>(type: "bigint", nullable: false),
-                    TennisTraineeListId = table.Column<long>(type: "bigint", nullable: false)
+                    CoachListId = table.Column<int>(type: "int", nullable: false),
+                    TennisTraineeListId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -508,33 +599,23 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTrainingPackages",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TennisTraineeId = table.Column<long>(type: "bigint", nullable: false),
-                    TennisTrainingPackageInformationId = table.Column<long>(type: "bigint", nullable: false),
+                    TennisTraineeId = table.Column<int>(type: "int", nullable: false),
+                    TennisTrainingPackageInformationId = table.Column<int>(type: "int", nullable: false),
                     TotalNumberOfTraining = table.Column<int>(type: "int", nullable: false),
                     NumberOfRemainingTraining = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(12,3)", precision: 12, scale: 3, nullable: false),
                     PaymentStatus = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisTrainingPackages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TennisTrainingPackages_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisTrainingPackages_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TennisTrainingPackages_TennisTrainees_TennisTraineeId",
                         column: x => x.TennisTraineeId,
@@ -545,40 +626,40 @@ namespace TAMS.DataAccess.Migrations
                         column: x => x.TennisTrainingPackageInformationId,
                         principalTable: "TennisTrainingPackageInformation",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainingPackages_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainingPackages_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TennisTrainings",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TennisTrainingPackageId = table.Column<long>(type: "bigint", nullable: true),
-                    TennisCoachId = table.Column<long>(type: "bigint", nullable: false),
-                    TennisCourtId = table.Column<long>(type: "bigint", nullable: false),
+                    TennisTrainingPackageId = table.Column<int>(type: "int", nullable: true),
+                    TennisCoachId = table.Column<int>(type: "int", nullable: false),
+                    TennisCourtId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(12,3)", precision: 12, scale: 3, nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrainingStatus = table.Column<int>(type: "int", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisTrainings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TennisTrainings_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisTrainings_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TennisTrainings_TennisCoaches_TennisCoachId",
                         column: x => x.TennisCoachId,
@@ -594,37 +675,37 @@ namespace TAMS.DataAccess.Migrations
                         column: x => x.TennisTrainingPackageId,
                         principalTable: "TennisTrainingPackages",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainings_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisTrainings_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TennisCourtSchedules",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TennisCourtId = table.Column<long>(type: "bigint", nullable: false),
-                    TennisTrainingId = table.Column<long>(type: "bigint", nullable: false),
+                    TennisCourtId = table.Column<int>(type: "int", nullable: false),
+                    TennisTrainingId = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TennisCourtSchedules", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TennisCourtSchedules_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TennisCourtSchedules_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TennisCourtSchedules_TennisCourts_TennisCourtId",
                         column: x => x.TennisCourtId,
@@ -635,14 +716,24 @@ namespace TAMS.DataAccess.Migrations
                         column: x => x.TennisTrainingId,
                         principalTable: "TennisTrainings",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisCourtSchedules_User_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TennisCourtSchedules_User_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "User",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TennisTraineeTennisTrainings",
                 columns: table => new
                 {
-                    TennisTraineeListId = table.Column<long>(type: "bigint", nullable: false),
-                    TennisTrainingListId = table.Column<long>(type: "bigint", nullable: false)
+                    TennisTraineeListId = table.Column<int>(type: "int", nullable: false),
+                    TennisTrainingListId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -686,55 +777,6 @@ namespace TAMS.DataAccess.Migrations
                 column: "UpdatedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_CreatedBy",
-                table: "AspNetUsers",
-                column: "CreatedBy");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_UpdatedBy",
-                table: "AspNetUsers",
-                column: "UpdatedBy");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ClubAddresses_ClubId",
                 table: "ClubAddresses",
                 column: "ClubId",
@@ -763,6 +805,38 @@ namespace TAMS.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Clubs_UpdatedBy",
                 table: "Clubs",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_CreatedBy",
+                table: "Role",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_UpdatedBy",
+                table: "Role",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "Role",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaim_CreatedBy",
+                table: "RoleClaim",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaim_RoleId",
+                table: "RoleClaim",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaim_UpdatedBy",
+                table: "RoleClaim",
                 column: "UpdatedBy");
 
             migrationBuilder.CreateIndex(
@@ -917,6 +991,83 @@ namespace TAMS.DataAccess.Migrations
                 name: "IX_TennisTrainings_UpdatedBy",
                 table: "TennisTrainings",
                 column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "User",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_CreatedBy",
+                table: "User",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_UpdatedBy",
+                table: "User",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "User",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaim_CreatedBy",
+                table: "UserClaim",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaim_UpdatedBy",
+                table: "UserClaim",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaim_UserId",
+                table: "UserClaim",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogin_CreatedBy",
+                table: "UserLogin",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogin_UpdatedBy",
+                table: "UserLogin",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogin_UserId",
+                table: "UserLogin",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRole_CreatedBy",
+                table: "UserRole",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRole_RoleId",
+                table: "UserRole",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRole_UpdatedBy",
+                table: "UserRole",
+                column: "UpdatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserToken_CreatedBy",
+                table: "UserToken",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserToken_UpdatedBy",
+                table: "UserToken",
+                column: "UpdatedBy");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -925,22 +1076,10 @@ namespace TAMS.DataAccess.Migrations
                 name: "AcademyAddresses");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
                 name: "ClubAddresses");
+
+            migrationBuilder.DropTable(
+                name: "RoleClaim");
 
             migrationBuilder.DropTable(
                 name: "TennisCourtSchedules");
@@ -955,10 +1094,22 @@ namespace TAMS.DataAccess.Migrations
                 name: "TennisTraineeTennisTrainings");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "UserClaim");
+
+            migrationBuilder.DropTable(
+                name: "UserLogin");
+
+            migrationBuilder.DropTable(
+                name: "UserRole");
+
+            migrationBuilder.DropTable(
+                name: "UserToken");
 
             migrationBuilder.DropTable(
                 name: "TennisTrainings");
+
+            migrationBuilder.DropTable(
+                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "TennisCoaches");
@@ -982,7 +1133,7 @@ namespace TAMS.DataAccess.Migrations
                 name: "Academies");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "User");
         }
     }
 }

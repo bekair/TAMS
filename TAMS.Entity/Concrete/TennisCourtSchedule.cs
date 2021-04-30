@@ -1,19 +1,19 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TAMS.Entity.Base;
+using TAMS.Entity.Abstracts;
 
 namespace TAMS.Entity.Concrete
 {
-    public class TennisCourtSchedule:EntityBase
+    public class TennisCourtSchedule : EntityBase
     {
         [Required]
         [ForeignKey("TennisCourt")]
-        public long TennisCourtId { get; set; }
+        public int TennisCourtId { get; set; }
 
         [Required]
         [ForeignKey("TennisTraining")]
-        public long TennisTrainingId { get; set; }
+        public int TennisTrainingId { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

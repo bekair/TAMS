@@ -1,14 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TAMS.Entity.Base;
+using TAMS.Common.Enums;
+using TAMS.Entity.Abstracts;
+using TAMS.Entity.Interfaces;
 
 namespace TAMS.Entity.Concrete
 {
-    public class TennisTraineeAddress : AddressBase
+    public class TennisTraineeAddress : EntityBase, IAddress
     {
         [Required]
         [ForeignKey("TennisTrainee")]
-        public long TennisTraineeId { get; set; }
+        public int TennisTraineeId { get; set; }
+
+        [Required]
+        public AddressType AddressType { get; set; }
+
+        [Required]
+        public string AddressName { get; set; }
+
+        [Required]
+        public string AddressLine { get; set; }
 
 
         //Navigation Properties

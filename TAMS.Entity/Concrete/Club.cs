@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TAMS.Entity.Base;
+using TAMS.Entity.Abstracts;
 
 namespace TAMS.Entity.Concrete
 {
     public class Club : EntityBase
     {
         [ForeignKey("Academy")]
-        public long? AcademyId { get; set; }
+        public int? AcademyId { get; set; }
 
         [Required]
         public string ClubName { get; set; }

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TAMS.Common.Enums;
-using TAMS.Entity.Base;
+using TAMS.Entity.Abstracts;
 
 namespace TAMS.Entity.Concrete
 {
@@ -10,7 +10,7 @@ namespace TAMS.Entity.Concrete
     {
         [Required]
         [ForeignKey("Club")]
-        public long ClubId { get; set; }
+        public int ClubId { get; set; }
 
         [Required]
         public string Name { get; set; }

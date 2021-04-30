@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.Common", "TAMS.Common\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.Entity", "TAMS.Entity\TAMS.Entity.csproj", "{2E784A8C-4F7B-428B-A9F7-1D06F0518A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.UnitTest", "TAMS.UnitTest\TAMS.UnitTest.csproj", "{14577880-202C-48B0-B4B5-D0563F9D566A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAMS.UnitTest", "TAMS.UnitTest\TAMS.UnitTest.csproj", "{14577880-202C-48B0-B4B5-D0563F9D566A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.WebApi", "TAMS.WebApi\TAMS.WebApi.csproj", "{EA8BDF71-4699-441B-939E-1C9650ED5099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{14577880-202C-48B0-B4B5-D0563F9D566A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14577880-202C-48B0-B4B5-D0563F9D566A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14577880-202C-48B0-B4B5-D0563F9D566A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8BDF71-4699-441B-939E-1C9650ED5099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8BDF71-4699-441B-939E-1C9650ED5099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8BDF71-4699-441B-939E-1C9650ED5099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8BDF71-4699-441B-939E-1C9650ED5099}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

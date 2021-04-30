@@ -1,30 +1,28 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TAMS.Entity.Concrete;
+using TAMS.Entity.Interfaces;
 
-namespace TAMS.Entity.Base
+namespace TAMS.Entity.Concrete
 {
-    public abstract class EntityBase : IEntity
+    public class UserToken : IdentityUserToken<int>, IGeneralInfo
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
-
         [Required]
         public bool IsActive { get; set; }
 
         [Required]
         [ForeignKey("CreatedByUser")]
-        public long CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
 
         [ForeignKey("UpdatedByUser")]
-        public long? UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
 
         public DateTime? UpdatedDate { get; set; }
+
 
         //Navigation Properties
         public AppUser CreatedByUser { get; set; }

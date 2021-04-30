@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TAMS.Entity.Base;
+using TAMS.Entity.Abstracts;
 
 namespace TAMS.Entity.Concrete
 {
@@ -9,7 +9,7 @@ namespace TAMS.Entity.Concrete
     {
         [Required]
         [ForeignKey("AppUser")]
-        public long AppUserId { get; set; }
+        public int AppUserId { get; set; }
 
         public int? YearsOfExperience { get; set; }
 

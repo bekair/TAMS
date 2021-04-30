@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TAMS.Common.Enums;
-using TAMS.Entity.Base;
+using TAMS.Entity.Abstracts;
 
 namespace TAMS.Entity.Concrete
 {
     public class TennisTraining : EntityBase
     {
         [ForeignKey("TennisTrainingPackage")]
-        public long? TennisTrainingPackageId { get; set; }
+        public int? TennisTrainingPackageId { get; set; }
         
         [Required]
         [ForeignKey("TennisCoach")]
-        public long TennisCoachId { get; set; }
+        public int TennisCoachId { get; set; }
 
         [Required]
         [ForeignKey("TennisCourt")]
-        public long TennisCourtId { get; set; }
+        public int TennisCourtId { get; set; }
 
         [Required]
         public decimal Price { get; set; }
