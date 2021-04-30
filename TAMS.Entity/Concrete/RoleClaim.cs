@@ -25,7 +25,7 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public AppUser CreatedByUser { get; set; }
-        public AppUser UpdatedByUser { get; set; }
+        public virtual AppUser CreatedByUser { get; set; }
+        public virtual AppUser UpdatedByUser { get; set; }
     }
 }

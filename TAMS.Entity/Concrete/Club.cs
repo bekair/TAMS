@@ -23,9 +23,9 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Academy Academy { get; set; }
-        public ICollection<TennisCourt> TennisCourtList { get; set; }
-        public ICollection<TennisTrainee> TennisTraineeList { get; set; }
-        public ClubAddress ClubAddress { get; set; }
+        public virtual Academy Academy { get; set; }
+        public virtual ICollection<TennisCourt> TennisCourtList { get; set; }
+        public virtual ICollection<TennisTrainee> TennisTraineeList { get; set; }
+        public virtual ClubAddress ClubAddress { get; set; }
     }
 }

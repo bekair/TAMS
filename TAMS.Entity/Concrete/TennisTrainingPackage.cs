@@ -30,8 +30,8 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public ICollection<TennisTraining> TennisTrainingList { get; set; }
-        public TennisTrainee TennisTrainee { get; set; }
-        public TennisTrainingPackageInformation TennisTrainingPackageInformation { get; set; }
+        public virtual ICollection<TennisTraining> TennisTrainingList { get; set; }
+        public virtual TennisTrainee TennisTrainee { get; set; }
+        public virtual TennisTrainingPackageInformation TennisTrainingPackageInformation { get; set; }
     }
 }

@@ -23,6 +23,6 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Club Club { get; set; }
+        public virtual Club Club { get; set; }
     }
 }

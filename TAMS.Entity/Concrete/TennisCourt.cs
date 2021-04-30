@@ -28,7 +28,7 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Club Club { get; set; }
-        public ICollection<TennisCourtSchedule> TennisCourtScheduleList { get; set; }
+        public virtual Club Club { get; set; }
+        public virtual ICollection<TennisCourtSchedule> TennisCourtScheduleList { get; set; }
     }
 }

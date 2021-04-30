@@ -41,10 +41,10 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public AppUser CreatedByUser { get; set; }
-        public AppUser UpdatedByUser { get; set; }
-        public ICollection<AppUser> CreatedUserList { get; set; }
-        public ICollection<AppUser> UpdatedUserList { get; set; }
-        public TennisCoach TennisCoach { get; set; }
+        public virtual AppUser CreatedByUser { get; set; }
+        public virtual AppUser UpdatedByUser { get; set; }
+        public virtual ICollection<AppUser> CreatedUserList { get; set; }
+        public virtual ICollection<AppUser> UpdatedUserList { get; set; }
+        public virtual TennisCoach TennisCoach { get; set; }
     }
 }

@@ -23,6 +23,6 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Academy Academy { get; set; }
+        public virtual Academy Academy { get; set; }
     }
 }

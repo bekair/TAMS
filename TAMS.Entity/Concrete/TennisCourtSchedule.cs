@@ -23,7 +23,7 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public TennisCourt TennisCourt { get; set; }
-        public TennisTraining TennisTraining { get; set; }
+        public virtual TennisCourt TennisCourt { get; set; }
+        public virtual TennisTraining TennisTraining { get; set; }
     }
 }

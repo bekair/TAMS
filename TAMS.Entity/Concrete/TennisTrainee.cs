@@ -28,10 +28,10 @@ namespace TAMS.Entity.Concrete
 
 
         //Navigation Properties
-        public Club Club { get; set; }
-        public ICollection<TennisCoach> CoachList { get; set; }
-        public ICollection<TennisTraining> TennisTrainingList { get; set; }
-        public ICollection<TennisTrainingPackage> TennisTrainingPackage { get; set; }
-        public ICollection<TennisTraineeAddress> TennisTraineeAddressList { get; set; }
+        public virtual Club Club { get; set; }
+        public virtual ICollection<TennisCoach> CoachList { get; set; }
+        public virtual ICollection<TennisTraining> TennisTrainingList { get; set; }
+        public virtual ICollection<TennisTrainingPackage> TennisTrainingPackage { get; set; }
+        public virtual ICollection<TennisTraineeAddress> TennisTraineeAddressList { get; set; }
     }
 }
