@@ -17,8 +17,4 @@
     <ProjectReference Include="..\TAMS.Entity\TAMS.Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Implementations\" />
-  </ItemGroup>
-
 </Project>

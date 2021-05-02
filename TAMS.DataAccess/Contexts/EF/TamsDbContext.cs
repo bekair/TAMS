@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using TAMS.Entity.Concrete;
 
-namespace TAMS.DataAccess.DbContext.EF
+namespace TAMS.DataAccess.Contexts.EF
 {
     public class TamsDbContext : IdentityDbContext<AppUser, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {

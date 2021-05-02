@@ -1,8 +1,9 @@
-﻿using TAMS.Entity.Concrete;
+﻿using TAMS.DataAccess.Repositories.Interfaces.Abstracts;
+using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Interfaces
 {
-    public interface IClubAddressRepository : IRepository<ClubAddress>
+    public interface IClubAddressRepository : IRepositoryBase<ClubAddress>
     {
     }
 }

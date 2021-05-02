@@ -5,15 +5,13 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TAMS.Entity.Interfaces;
 
-namespace TAMS.DataAccess.Repositories.Interfaces
+namespace TAMS.DataAccess.Repositories.Interfaces.Abstracts
 {
-    public interface IRepository<TEntity> where TEntity : class, new()
+    public interface IGenericInfoRepository<TEntity> where TEntity : class, IGenericInfo, new()
     {
         Task AddAsync(TEntity addedEntity);
 
         Task AddRangeAsync(ICollection<TEntity> addedEntityList);
-
-        Task<TEntity> GetByIdAsync(int id);
 
         IQueryable<TEntity> GetAll();
 

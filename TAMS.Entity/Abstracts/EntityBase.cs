@@ -6,7 +6,7 @@ using TAMS.Entity.Interfaces;
 
 namespace TAMS.Entity.Abstracts
 {
-    public abstract class EntityBase : IEntity
+    public abstract class EntityBase : IKey, IGenericInfo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

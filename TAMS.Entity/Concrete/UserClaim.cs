@@ -6,7 +6,7 @@ using TAMS.Entity.Interfaces;
 
 namespace TAMS.Entity.Concrete
 {
-    public class UserClaim : IdentityUserClaim<int>, IEntity
+    public class UserClaim : IdentityUserClaim<int>, IKey, IGenericInfo
     {
         [Required]
         public bool IsActive { get; set; }

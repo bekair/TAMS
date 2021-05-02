@@ -8,7 +8,7 @@ using TAMS.Entity.Interfaces;
 
 namespace TAMS.Entity.Concrete
 {
-    public class AppUser : IdentityUser<int>, IEntity
+    public class AppUser : IdentityUser<int>, IKey, IGenericInfo
     {
         public AppUser() : base()
         {

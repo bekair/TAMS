@@ -3,7 +3,7 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.Entity.Interfaces
 {
-    public interface IGeneralInfo
+    public interface IGenericInfo
     {
         bool IsActive { get; set; }
         int CreatedBy { get; set; }

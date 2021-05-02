@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TAMS.DataAccess.DbContext.EF;
+using TAMS.DataAccess.Contexts.EF;
 using TAMS.Entity.Concrete;
 
 namespace TAMS.Web

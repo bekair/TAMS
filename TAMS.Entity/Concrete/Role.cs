@@ -6,7 +6,7 @@ using TAMS.Entity.Interfaces;
 
 namespace TAMS.Entity.Concrete
 {
-    public class Role : IdentityRole<int>, IEntity
+    public class Role : IdentityRole<int>, IKey, IGenericInfo
     {
         [Required]
         public bool IsActive { get; set; }
