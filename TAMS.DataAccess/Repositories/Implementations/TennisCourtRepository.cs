@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class RoleService : RepositoryBase<Role, TamsDbContext>, IRoleRepository
+    public class TennisCourtRepository : RepositoryBase<TennisCourt, TamsDbContext>, ITennisCourtRepository
     {
-        public RoleService(TamsDbContext context) : base(context)
+        public TennisCourtRepository(TamsDbContext context) : base(context)
         {
         }
     }

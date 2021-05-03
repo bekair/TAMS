@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class AcademyAddressService : RepositoryBase<AcademyAddress, TamsDbContext>, IAcademyAddressRepository
+    public class AcademyAddressRepository : RepositoryBase<AcademyAddress, TamsDbContext>, IAcademyAddressRepository
     {
-        public AcademyAddressService(TamsDbContext context) : base(context)
+        public AcademyAddressRepository(TamsDbContext context) : base(context)
         {
         }
     }

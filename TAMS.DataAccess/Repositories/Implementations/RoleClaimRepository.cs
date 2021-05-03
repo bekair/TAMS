@@ -5,9 +5,9 @@ using TAMS.DataAccess.Repositories.Abstracts;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class RoleClaimService : RepositoryBase<RoleClaim, TamsDbContext>, IRoleClaimRepository
+    public class RoleClaimRepository : RepositoryBase<RoleClaim, TamsDbContext>, IRoleClaimRepository
     {
-        public RoleClaimService(TamsDbContext context) : base(context)
+        public RoleClaimRepository(TamsDbContext context) : base(context)
         {
         }
     }

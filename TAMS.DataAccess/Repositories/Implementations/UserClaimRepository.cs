@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class ClubService : RepositoryBase<Club, TamsDbContext>, IClubRepository
+    public class UserClaimRepository : RepositoryBase<UserClaim, TamsDbContext>, IUserClaimRepository
     {
-        public ClubService(TamsDbContext context) : base(context)
+        public UserClaimRepository(TamsDbContext context) : base(context)
         {
         }
     }

@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class TennisCourtScheduleService : RepositoryBase<TennisCourtSchedule, TamsDbContext>, ITennisCourtScheduleRepository
+    public class ClubRepository : RepositoryBase<Club, TamsDbContext>, IClubRepository
     {
-        public TennisCourtScheduleService(TamsDbContext context) : base(context)
+        public ClubRepository(TamsDbContext context) : base(context)
         {
         }
     }

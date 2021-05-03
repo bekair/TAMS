@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class UserClaimService : RepositoryBase<UserClaim, TamsDbContext>, IUserClaimRepository
+    public class UserLoginRepository : GenericInfoRepositoryBase<UserLogin, TamsDbContext>, IUserLoginRepository
     {
-        public UserClaimService(TamsDbContext context) : base(context)
+        public UserLoginRepository(TamsDbContext context) : base(context)
         {
         }
     }

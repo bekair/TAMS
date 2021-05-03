@@ -5,9 +5,9 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.DataAccess.Repositories.Implementations
 {
-    public class UserTokenService : GenericInfoRepositoryBase<UserToken, TamsDbContext>, IUserTokenRepository
+    public class UserRepository : RepositoryBase<AppUser, TamsDbContext>, IUserRepository
     {
-        public UserTokenService(TamsDbContext context) : base(context)
+        public UserRepository(TamsDbContext context) : base(context)
         {
         }
     }
