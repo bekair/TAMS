@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TAMS.DataAccess.Contexts.EF;
 
 namespace TAMS.DataAccess.Migrations
 {
     [DbContext(typeof(TamsDbContext))]
-    partial class TamsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210505105316_AddRelationBetweenTennisCoachAndClub")]
+    partial class AddRelationBetweenTennisCoachAndClub
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\TAMS.DataAccess\TAMS.DataAccess.csproj" />
     <ProjectReference Include="..\TAMS.Entity\TAMS.Entity.csproj" />
   </ItemGroup>
 

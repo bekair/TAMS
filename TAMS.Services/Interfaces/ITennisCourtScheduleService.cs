@@ -4,7 +4,7 @@ using TAMS.Entity.Concrete;
 
 namespace TAMS.Services.Interfaces
 {
-    public interface ITennisCourtSchedule
+    public interface ITennisCourtScheduleService
     {
         Task<TennisCourtSchedule> GetTennisCourtScheduleByIdAsync(int id);
         Task<ICollection<TennisCourtSchedule>> GetTennisCourtScheduleByTennisCourtIdAsync(int tennisCourtId);
