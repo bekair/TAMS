@@ -17,6 +17,10 @@ namespace TAMS.DataAccess.Repositories.Interfaces.Abstracts
 
         IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression);
 
+        void Update(TEntity updatedEntity);
+
+        void UpdateRange(ICollection<TEntity> updatedEntityList);
+
         void Remove(TEntity removedEntity);
 
         void RemoveRange(ICollection<TEntity> removedEntityList);

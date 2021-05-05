@@ -64,6 +64,12 @@ namespace TAMS.DataAccess.Contexts.EF
                 .WithMany(m => m.TennisCourtList)
                 .HasForeignKey(m => m.ClubId);
 
+            //One-to-Many Relationship between TennisCoach and Club
+            builder.Entity<TennisCoach>()
+                .HasOne(m => m.Club)
+                .WithMany(m => m.TennisCoachList)
+                .HasForeignKey(m => m.ClubId);
+
             //One-to-Many Relationship between TennisTrainee and Club
             builder.Entity<TennisTrainee>()
                 .HasOne(m => m.Club)

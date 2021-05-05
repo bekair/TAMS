@@ -40,14 +40,24 @@ namespace TAMS.DataAccess.Repositories.Abstracts
             return _context.Set<TEntity>().Where(expression);
         }
 
+        public void Update(TEntity updatedEntity)
+        {
+            _context.Update(updatedEntity);
+        }
+
+        public void UpdateRange(ICollection<TEntity> updatedEntityList)
+        {
+            _context.UpdateRange(updatedEntityList);
+        }
+
         public void Remove(TEntity removedEntity)
         {
-            removedEntity.IsActive = false;
+            _context.Remove(removedEntity);
         }
 
         public void RemoveRange(ICollection<TEntity> removedEntityList)
         {
-            removedEntityList.ToList().ForEach(entity => entity.IsActive = false);
+            _context.RemoveRange(removedEntityList);
         }
     }
 }

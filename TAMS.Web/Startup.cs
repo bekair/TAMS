@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TAMS.DataAccess.Contexts.EF;
-using TAMS.Entity.Concrete;
 
 namespace TAMS.Web
 {
@@ -21,10 +18,6 @@ namespace TAMS.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AppUser, IdentityRole<long>>()
-                    .AddEntityFrameworkStores<TamsDbContext>()
-                    .AddDefaultTokenProviders();
-
             services.AddRazorPages()
                     .AddRazorRuntimeCompilation();
 
