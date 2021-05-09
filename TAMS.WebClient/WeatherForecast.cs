@@ -1,6 +1,6 @@
 using System;
 
-namespace TAMS.WebApi
+namespace TAMS.WebClient
 {
     public class WeatherForecast
     {

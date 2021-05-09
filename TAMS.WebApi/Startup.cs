@@ -1,3 +1,4 @@
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using TAMS.DataAccess.Contexts.EF;
 using TAMS.DataAccess.Repositories.Implementations;
 using TAMS.DataAccess.Repositories.Interfaces;
@@ -14,6 +16,7 @@ using TAMS.DataAccess.UnitOfWork.Interfaces;
 using TAMS.Entity.Concrete;
 using TAMS.Services.Implementations;
 using TAMS.Services.Interfaces;
+using TAMS.WebApi.Configurations;
 
 namespace TAMS.WebApi
 {
@@ -43,6 +46,24 @@ namespace TAMS.WebApi
                     .AddEntityFrameworkStores<TamsDbContext>()
                     .AddDefaultTokenProviders();
 
+            services.AddIdentityServer()
+                    .AddInMemoryApiResources(IdentityConfig.GetApiResources())
+                    .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
+                    .AddInMemoryClients(IdentityConfig.GetClients())
+                    .AddDeveloperSigningCredential();
+
+            //In order to get 401(Unauthorized) instead of 404(NotFound) in Unauthorized requests, this row MUST be below AddIdentityServer() call.
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+            })
+              .AddIdentityServerAuthentication(options =>
+              {
+                  options.Authority = "https://localhost:44324";
+                  options.ApiName = "TAMSApi";
+              });
+
             //UnitOfWork DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -53,10 +74,9 @@ namespace TAMS.WebApi
             AddBusinessServiceDependencies(services);
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TAMS.WebApi", Version = "v1" });
-            });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "TAMS.WebApi", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,13 +92,12 @@ namespace TAMS.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseIdentityServer();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
         //Add Repository dependencies

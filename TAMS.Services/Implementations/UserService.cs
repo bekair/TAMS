@@ -1,8 +1,9 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TAMS.Common.DTOs.ResponseDTOs;
 using TAMS.DataAccess.UnitOfWork.Interfaces;
-using TAMS.Entity.Concrete;
 using TAMS.Services.Interfaces;
 
 namespace TAMS.Services.Implementations
@@ -10,25 +11,32 @@ namespace TAMS.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork unitOfWork)
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public Task<ICollection<AppUser>> GetAllUsersAsync()
+        public async Task<ICollection<UserDTO>> GetAllUsersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetIdByUserNameAsync(string userName)
+        public async Task<int> GetIdByUserNameAsync(string userName)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<UserDTO> GetUserByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> RegisterUserAsync(string email, string userName, string password)
+        {
+            return await _unitOfWork.Users.RegisterUserAsync(email, userName, password);
         }
     }
 }
