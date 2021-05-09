@@ -25,9 +25,11 @@ namespace TAMS.WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticConfiguration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfiguration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -60,8 +62,8 @@ namespace TAMS.WebApi
             })
               .AddIdentityServerAuthentication(options =>
               {
-                  options.Authority = "https://localhost:44324";
-                  options.ApiName = "TAMSApi";
+                  options.Authority = Configuration.GetValue<string>("TamsApiBaseAddress");
+                  options.ApiName = Configuration.GetValue<string>("TamsApiResourceName");
               });
 
             //UnitOfWork DI

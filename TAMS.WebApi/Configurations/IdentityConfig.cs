@@ -1,4 +1,5 @@
 ﻿using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace TAMS.WebApi.Configurations
@@ -9,7 +10,7 @@ namespace TAMS.WebApi.Configurations
         {
             return new List<ApiResource>
             {
-                new("TAMSApi", "Tennis Academy Management System Api")
+                new(Startup.StaticConfiguration.GetValue<string>("TamsApiResourceName"), "Tennis Academy Management System Api")
                 {
                      Scopes = { "TAMSApi.read" }
                 }
