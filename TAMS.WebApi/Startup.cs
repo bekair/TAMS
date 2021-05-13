@@ -49,9 +49,8 @@ namespace TAMS.WebApi
                     .AddDefaultTokenProviders();
 
             services.AddIdentityServer()
-                    .AddInMemoryApiResources(IdentityConfig.GetApiResources())
-                    .AddInMemoryApiScopes(IdentityConfig.GetApiScopes())
-                    .AddInMemoryClients(IdentityConfig.GetClients())
+                    .AddInMemoryApiScopes(Config.ApiScopes)
+                    .AddInMemoryClients(Config.Clients)
                     .AddDeveloperSigningCredential();
 
             //In order to get 401(Unauthorized) instead of 404(NotFound) in Unauthorized requests, this row MUST be below AddIdentityServer() call.
@@ -63,7 +62,7 @@ namespace TAMS.WebApi
               .AddIdentityServerAuthentication(options =>
               {
                   options.Authority = Configuration.GetValue<string>("TamsApiBaseAddress");
-                  options.ApiName = Configuration.GetValue<string>("TamsApiResourceName");
+                  options.ApiName = Configuration.GetValue<string>("TamsApiScopeName");
               });
 
             //UnitOfWork DI
