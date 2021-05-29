@@ -1,0 +1,15 @@
+﻿@*@using System.Net;*@
+@model LoginViewModel
+
+@{
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<h1>LOGIN</h1>
+
+@*@WebUtility.UrlEncode(returnUrl)*@
+<form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+    <input type="text" asp-for="UserName" placeholder="Username" />
+    <input type="password" asp-for="Password" placeholder="Password" />
+    <input type="submit" value="Login" />
+</form>

@@ -1,4 +1,3 @@
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +15,6 @@ using TAMS.DataAccess.UnitOfWork.Interfaces;
 using TAMS.Entity.Concrete;
 using TAMS.Services.Implementations;
 using TAMS.Services.Interfaces;
-using TAMS.WebApi.Configurations;
 
 namespace TAMS.WebApi
 {
@@ -43,27 +41,10 @@ namespace TAMS.WebApi
                 );
             });
 
-            //IdentityServer DI
+            //Identity DI
             services.AddIdentity<AppUser, Role>()
                     .AddEntityFrameworkStores<TamsDbContext>()
                     .AddDefaultTokenProviders();
-
-            services.AddIdentityServer()
-                    .AddInMemoryApiScopes(Config.ApiScopes)
-                    .AddInMemoryClients(Config.Clients)
-                    .AddDeveloperSigningCredential();
-
-            //In order to get 401(Unauthorized) instead of 404(NotFound) in Unauthorized requests, this row MUST be below AddIdentityServer() call.
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            })
-              .AddIdentityServerAuthentication(options =>
-              {
-                  options.Authority = Configuration.GetValue<string>("TamsApiBaseAddress");
-                  options.ApiName = Configuration.GetValue<string>("TamsApiScopeName");
-              });
 
             //UnitOfWork DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -93,7 +74,6 @@ namespace TAMS.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseIdentityServer();
 
             app.UseAuthentication();
             app.UseAuthorization();
