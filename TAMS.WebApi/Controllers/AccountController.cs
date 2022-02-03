@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using TAMS.Services.Interfaces;
 using TAMS.WebApi.Controllers.Abstracts;
+using TAMS.WebApi.Helpers.Attributes;
 
 namespace TAMS.WebApi.Controllers
 {
@@ -12,33 +12,26 @@ namespace TAMS.WebApi.Controllers
     [Route("api/[controller]")]
     public class AccountController : BaseController
     {
-        private readonly ILogger<AccountController> _logger;
         private readonly IUserService _userService;
 
         public AccountController(ILogger<AccountController> logger, IUserService userService, IMapper mapper)
-            :base(mapper)
+            :base(mapper, logger)
         {
-            _logger = logger;
             _userService = userService;
         }
 
-        [Authorize]
-        [HttpGet("Deneme")]
-        public string Deneme()
-        {
-            return "boş";
-        }
-
-        [HttpPost("RegisterUser")]
-        public async Task<bool> RegisterAsync()
+        [HttpPost("Register")]
+        public async Task<bool> Register()
         {
             return await _userService.RegisterUserAsync("can.baykal@hotmail.com", "bekair", "Abc123!");
         }
 
-        [HttpPost]
-        public bool Login()
+        [HttpPost("Login")]
+        [Authorize]
+        public async Task<bool> Login()
         {
             return true;
+            //return await _userService.;
         }
 
     }

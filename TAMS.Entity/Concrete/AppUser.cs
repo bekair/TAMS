@@ -23,6 +23,7 @@ namespace TAMS.Entity.Concrete
         public string LastName { get; set; }
 
         public Gender Gender { get; set; }
+        public int Age { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
