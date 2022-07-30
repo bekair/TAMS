@@ -24,7 +24,7 @@ namespace TAMS.DataAccess.Repositories.Implementations
             {
                 UserName = userName,
                 Email = email,
-                IsActive=true,
+                IsActive = true,
                 CreatedDate = DateTime.Now
             };
             newUser.CreatedBy = newUser.Id;

@@ -2,14 +2,14 @@
 using TAMS.Common.DTOs.ResponseDTOs;
 using TAMS.Entity.Concrete;
 
-namespace TAMS.WebApi.Mappers.Configuration
+namespace TAMS.WebApi.Mappers.Configurations
 {
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
-            CreateMap<AppUser, UserDTO>();
-            CreateMap<UserDTO, AppUser>();
+            CreateMap<AppUser, RegisterUserDTO>();
+            CreateMap<RegisterUserDTO, AppUser>();
         }
     }
 }

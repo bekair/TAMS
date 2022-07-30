@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using TAMS.DataAccess.Contexts.EF;
 using TAMS.DataAccess.Repositories.Implementations;
@@ -15,6 +16,7 @@ using TAMS.DataAccess.UnitOfWork.Interfaces;
 using TAMS.Entity.Concrete;
 using TAMS.Services.Implementations;
 using TAMS.Services.Interfaces;
+using TAMS.WebApi.Middlewares;
 
 namespace TAMS.WebApi
 {
@@ -32,6 +34,8 @@ namespace TAMS.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             //DbContext DI
             services.AddDbContext<TamsDbContext>(options =>
             {
@@ -55,15 +59,52 @@ namespace TAMS.WebApi
             //Business Service DI
             AddBusinessServiceDependencies(services);
 
-            services.AddControllers();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    );
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "TAMS.WebApi", Version = "v1" }));
+            services.AddSwaggerGen(swagger =>
+            {
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TAMS.Api",
+                    Version = "v1",
+                    Description = "Tennis Academy Management System"
+                });
+                swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization Header Using The Bearer Scheme. \r\n \r\n Enter 'Bearer' [space] and then your token in text input below. \r\n\r\nExample: \"Bearer 123456abcdef\"",
+                });
+                swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,16 +113,16 @@ namespace TAMS.WebApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
-        //Add Repository dependencies
+        //Add Repository Dependencies
         private static void AddRepositoryDependencies(IServiceCollection services)
         {
             services.AddScoped<IAcademyAddressRepository, AcademyAddressRepository>();
@@ -105,7 +146,7 @@ namespace TAMS.WebApi
             services.AddScoped<IUserTokenRepository, UserTokenRepository>();
         }
 
-        //Add Business Service dependencies
+        //Add Business Service Dependencies
         private static void AddBusinessServiceDependencies(IServiceCollection services)
         {
             services.AddTransient<IAcademyAddressService, AcademyAddressService>();

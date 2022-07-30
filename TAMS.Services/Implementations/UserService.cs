@@ -19,7 +19,7 @@ namespace TAMS.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<ICollection<UserDTO>> GetAllUsersAsync()
+        public async Task<ICollection<RegisterUserDTO>> GetAllUsersAsync()
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace TAMS.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<UserDTO> GetUserByIdAsync(int id)
+        public async Task<RegisterUserDTO> GetUserByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
