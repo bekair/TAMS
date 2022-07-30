@@ -34,7 +34,7 @@ namespace TAMS.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password)
+        public async Task<RegisterResultDTO> RegisterUserAsync(string email, string userName, string password)
         {
             return await _unitOfWork.Users.RegisterUserAsync(email, userName, password);
         }

@@ -11,13 +11,14 @@ namespace TAMS.DataAccess.Repositories.Implementations
     public class UserRepository : RepositoryBase<AppUser, TamsDbContext>, IUserRepository
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _userManager;
 
         public UserRepository(TamsDbContext context, UserManager<AppUser> userManager) : base(context)
         {
             _userManager = userManager;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string userName, string password)
+        public async Task<IdentityResult> RegisterUserAsync(string email, string userName, string password)
         {
             AppUser newUser = new()
             {
@@ -28,9 +29,7 @@ namespace TAMS.DataAccess.Repositories.Implementations
             };
             newUser.CreatedBy = newUser.Id;
 
-            IdentityResult registerResult = await _userManager.CreateAsync(newUser, password);
-
-            return registerResult.Succeeded;
+            return await _userManager.CreateAsync(newUser, password);_userManager.
         }
     }
 }
