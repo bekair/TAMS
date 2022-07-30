@@ -36,7 +36,8 @@ namespace TAMS.Services.Implementations
 
         public async Task<RegisterResultDTO> RegisterUserAsync(string email, string userName, string password)
         {
-            return await _unitOfWork.Users.RegisterUserAsync(email, userName, password);
+            return null;
+            //return await _unitOfWork.Users.RegisterUserAsync(email, userName, password);
         }
     }
 }
